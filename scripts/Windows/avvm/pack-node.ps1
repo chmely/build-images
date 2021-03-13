@@ -3,11 +3,11 @@ $ErrorActionPreference = 'Stop'
 $avvmRoot = 'c:\avvm\node'
 
 $node_versions = @(
-    "10.23.0"
-    "12.19.0"
-    "14.15.0"
-    "15.0.0"
-    "15.2.0"
+    "10.23.1"
+    "12.20.1"
+    "14.15.4"
+    "15.5.1"
+    "15.6.0"
 )
 
 foreach($node_version in $node_versions) {

@@ -41,16 +41,10 @@ configure_sshd
 configure_autologin
 install_virtualenv
 install_gcc
-su -l "${USER_NAME}" -c "
-        PATH=$PATH
-        USER_NAME=${USER_NAME}
-        $(declare -f log_version)
-        $(declare -f install_pip)
-        $(declare -f fix_python_six)
-        $(declare -f install_virtualenv)
-        $(declare -f install_pythons)
-        install_pythons" ||
-    _abort $?
+install_gpg
+install_rvm_and_rubies
+install_fastlane
+install_xcode  
 su -l ${USER_NAME} -c "
         PATH=$PATH
         USER_NAME=${USER_NAME}
@@ -62,15 +56,51 @@ su -l ${USER_NAME} -c "
         $(declare -f log_version)
         install_vcpkg" ||
     _abort $?
-install_qt
+su -l "${USER_NAME}" -c "
+        PATH=$PATH
+        USER_NAME=${USER_NAME}
+        $(declare -f log_version)
+        $(declare -f brew_install)
+        $(declare -f write_line)
+        $(declare -f add_line)
+        $(declare -f replace_line)        
+        $(declare -f install_gvm)
+        $(declare -f install_golangs)
+        $(declare -f install_gvm_and_golangs)
+        install_gvm_and_golangs" ||
+    _abort $?
+su -l "${USER_NAME}" -c "
+        PATH=$PATH
+        USER_NAME=${USER_NAME}
+        $(declare -f log_version)
+        $(declare -f write_line)
+        $(declare -f add_line)
+        $(declare -f replace_line)
+        $(declare -f install_nvm)
+        $(declare -f install_nvm_nodejs)
+        $(declare -f install_nvm_and_nodejs)
+        install_nvm_and_nodejs" ||
+    _abort $?
+su -l "${USER_NAME}" -c "
+        PATH=$PATH
+        USER_NAME=${USER_NAME}
+        $(declare -f log_version)
+        $(declare -f install_pip)
+        $(declare -f fix_python_six)
+        $(declare -f install_virtualenv)
+        $(declare -f install_pythons)
+        install_pythons" ||
+    _abort $?
+su -l "${USER_NAME}" -c "
+        PATH=$PATH
+        USER_NAME=${USER_NAME}
+        $(declare -f log_version)
+        $(declare -f install_qt)
+        install_qt" ||
+    _abort $?
 install_cvs
-install_gpg
-install_rvm_and_rubies
-install_fastlane
 install_cmake
 install_openjdk
-install_xcode
-
 su -l "${USER_NAME}" -c "
         PATH=$PATH
         USER_NAME=${USER_NAME}
@@ -89,7 +119,5 @@ su -l "${USER_NAME}" -c "
     _abort $?
 install_cocoapods
 install_mono
-install_gvm_and_golangs
-install_nvm_and_nodejs
 configure_term
 cleanup

@@ -54,12 +54,19 @@ if ($isLinux) {
 $package_updates = @{}
 $feeds_cache = @{}
 
+function GetQtPrefix($version) {
+    if ($version.startsWith('6')) {
+        return 'qt6'
+    } else {
+        return 'qt5'
+    }
+}
 function GetVersionId($version) {
     return $version.replace('.', '')
 }
 
 function GetReleaseRootUrl($version) {
-    return "$QT_ROOT_URL/qt5_$(GetVersionId $version)"
+    return "$QT_ROOT_URL/$(GetQtPrefix $version)_$(GetVersionId $version)"
 }
 
 function FetchToolsUpdatePackages($toolsId) {
@@ -136,7 +143,7 @@ function Install-QtComponent {
 
     if ($Version -and $Name) {
         FetchReleaseUpdatePackages $version
-        InstallComponentById "qt.qt5.$(GetVersionId $version).$Name" $Path -whatif:$whatIf -excludeDocs:$excludeDocs -excludeExamples:$excludeExamples
+        InstallComponentById "qt.$(GetQtPrefix $version).$(GetVersionId $version).$Name" $Path -whatif:$whatIf -excludeDocs:$excludeDocs -excludeExamples:$excludeExamples
     } elseif ($Id) {
         InstallComponentById $Id $Path -whatif:$whatIf -excludeDocs:$excludeDocs -excludeExamples:$excludeExamples
     } else {
@@ -277,7 +284,7 @@ Prefix=.."
         if (Test-Path $mkspecPath) {
             Write-Host "Patching $mkspecPath"
             $spec = [IO.File]::ReadAllText($mkspecPath)
-            $spec = $spec.Replace('QT_EDITION = Enterprise', 'QT_EDITION = OpenSource').Replace('QT_LICHECK = licheck.exe', 'QT_LICHECK =').Replace('QT_LICHECK = licheck64', 'QT_LICHECK =')
+            $spec = $spec.Replace('QT_EDITION = Enterprise', 'QT_EDITION = OpenSource').Replace('QT_LICHECK = licheck.exe', 'QT_LICHECK =').Replace('QT_LICHECK = licheck64', 'QT_LICHECK =').Replace('QT_LICHECK = licheck_mac', 'QT_LICHECK =')
             [IO.File]::WriteAllText($mkspecPath, $spec)
         }
     }
