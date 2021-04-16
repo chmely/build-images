@@ -2,7 +2,7 @@ ARG BUILD_IMAGE=mcr.microsoft.com/windows/servercore:ltsc2019
 ARG BASE_IMAGE=mcr.microsoft.com/windows/nanoserver:1809
 FROM $BUILD_IMAGE as installer-env
 
-ENV APPVEYOR_BUILD_AGENT_VERSION=7.0.2417
+ENV APPVEYOR_BUILD_AGENT_VERSION=7.0.2974
 
 COPY ./scripts/Windows ./scripts
 
@@ -27,7 +27,7 @@ ENV ProgramFiles="C:\Program Files" \
     PSModuleAnalysisCachePath="$LOCALAPPDATA\Microsoft\Windows\PowerShell\docker\ModuleAnalysisCache" \
     PSCORE="$ProgramFiles\PowerShell\pwsh.exe"
 
-COPY --from=installer-env ["C:/Program Files/PowerShell/6", "C:/Program Files/PowerShell"]
+COPY --from=installer-env ["C:/Program Files/PowerShell/7", "C:/Program Files/PowerShell"]
 COPY --from=installer-env ["C:/Program Files/7-Zip", "C:/Program Files/7-Zip"]
 COPY --from=installer-env ["C:/Program Files/Git", "C:/Program Files/Git"]
 COPY --from=installer-env ["C:/Program Files/AppVeyor/BuildAgent", "C:/Program Files/AppVeyor/BuildAgent"]
