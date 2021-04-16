@@ -7,8 +7,7 @@ $installDir = "C:\Qt"
 $component_groups = @(
     @{
         components = @(
-            "qt.tools.ifw.41",
-            "qt.license.thirdparty"
+            "qt.tools.ifw.41"
         )
     }
 )
