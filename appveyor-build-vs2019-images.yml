@@ -25,18 +25,18 @@ environment:
 # Azure - Preview
 # ===============
 
-  - job_name: VS 2019 Preview on Azure West US
-    APPVEYOR_BUILD_WORKER_IMAGE: vs2019-preview-master-azure-westus
-    APPVEYOR_BAKE_IMAGE: vs2019-preview-master-azure-westus
-    install_vs2019_preview: true
+  # - job_name: VS 2019 Preview on Azure West US
+  #   APPVEYOR_BUILD_WORKER_IMAGE: vs2019-preview-master-azure-westus
+  #   APPVEYOR_BAKE_IMAGE: vs2019-preview-master-azure-westus
+  #   install_vs2019_preview: true
 
 # Hyper-V - Preview
 # ===============
 
-  - job_name: VS 2019 Preview on Hyper-V
-    APPVEYOR_BUILD_WORKER_IMAGE: vs2019-preview-master
-    APPVEYOR_BAKE_IMAGE: vs2019-preview-master
-    install_vs2019_preview: true
+  # - job_name: VS 2019 Preview on Hyper-V
+  #   APPVEYOR_BUILD_WORKER_IMAGE: vs2019-preview-master
+  #   APPVEYOR_BAKE_IMAGE: vs2019-preview-master
+  #   install_vs2019_preview: true
 
 init:
   - appveyor version
