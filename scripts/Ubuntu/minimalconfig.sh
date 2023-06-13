@@ -142,8 +142,8 @@ install_gitlfs ||
 
 install_virtualbox ||
     _abort $?
-install_mysql ||
-    _abort $?
+# install_mysql ||
+#     _abort $?
 install_postgresql ||
     _abort $?    
 
