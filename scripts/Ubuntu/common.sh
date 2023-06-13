@@ -417,7 +417,7 @@ function install_azure_linux_agent(){
 
 function copy_appveyoragent() {
     if [[ -z "${APPVEYOR_BUILD_AGENT_VERSION-}" || "${#APPVEYOR_BUILD_AGENT_VERSION}" = "0" ]]; then
-        APPVEYOR_BUILD_AGENT_VERSION=7.0.3254;
+        APPVEYOR_BUILD_AGENT_VERSION=7.0.3279;
     fi
 
     echo "[INFO] Installing AppVeyor Build Agent v${APPVEYOR_BUILD_AGENT_VERSION}"
@@ -1561,8 +1561,9 @@ function configure_apt_mysql() {
 function install_mysql() {
     echo "[INFO] Running install_mysql..."
     configure_apt_mysql
+    echo"try installing specific version ()of mysql-server"
 
-    apt-get -y -q install mysql-server ||
+    apt-get -y -q install mysql-server=5.7 ||
         { echo "[ERROR] Cannot install MySQL." 1>&2; return 10;}
     systemctl start mysql
     #shellcheck disable=SC2016
